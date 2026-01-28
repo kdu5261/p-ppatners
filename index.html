@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>P&P Loan Partners Guide</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #191f28;
+            --text-sub: #4e5968;
+            --accent-blue: #3182f6;
+            --border-color: #f2f4f6;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            --border-radius: 20px;
+            --header-height: 60px;
+            --nav-height: 75px;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            word-break: keep-all;
+        }
+
+        /* Language Toggle */
+        .lang-ko .ru-content { display: none !important; }
+        .lang-ru .ko-content { display: none !important; }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .logo { font-weight: 800; font-size: 18px; color: var(--text-main); letter-spacing: -0.5px; }
+
+        .lang-tabs {
+            display: flex;
+            background: #f2f4f6;
+            padding: 4px;
+            border-radius: 12px;
+        }
+
+        .tab-btn {
+            border: none;
+            background: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-sub);
+            transition: 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #ffffff;
+            color: var(--accent-blue);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Main Content */
+        main { padding: 24px 20px 140px 20px; max-width: 600px; margin: 0 auto; }
+
+        .hero-img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            margin-bottom: 32px;
+            object-fit: cover;
+            aspect-ratio: 16/9;
+            background: #f9fafb;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+        }
+
+        h1 { font-size: 26px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+        h2 { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+        p { color: var(--text-sub); font-size: 16px; }
+
+        /* Buttons */
+        .btn-large {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+            background: #f2f4f6;
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 18px;
+            font-weight: 600;
+            font-size: 17px;
+            margin-bottom: 12px;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .btn-large:active { transform: scale(0.98); background: #e5e8eb; }
+
+        /* Step Styles */
+        .step-item { margin-bottom: 48px; }
+        .step-label {
+            display: inline-block;
+            background: #e8f3ff;
+            color: var(--accent-blue);
+            font-weight: 800;
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .step-text { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+        .step-img { width: 100%; border-radius: 16px; border: 1px solid var(--border-color); margin: 12px 0; }
+        .example-box {
+            background: #f9fafb;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 15px;
+            color: var(--text-sub);
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        audio { width: 100%; height: 45px; margin-top: 10px; border-radius: 8px; }
+
+        /* Bottom Nav */
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding-bottom: env(safe-area-inset-bottom);
+            z-index: 1001;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #b0b8c1;
+            font-size: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+        .nav-link.active { color: var(--text-main); font-weight: 700; }
+        .nav-icon { 
+            width: 24px; 
+            height: 24px; 
+            margin-bottom: 4px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .active .nav-icon { stroke: var(--accent-blue); }
+
+        /* Download Grids */
+        .dl-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 12px 0; }
+        .dl-btn {
+            background: #f2f4f6;
+            padding: 12px 4px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        /* Footer */
+        footer {
+            background: #f9fafb;
+            padding: 40px 20px 120px 20px;
+            font-size: 13px;
+            color: #8b95a1;
+            line-height: 1.8;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .copyright-banner {
+            text-align: center;
+            padding: 12px 0;
+            font-size: 11px;
+            color: #b0b8c1;
+            border-top: 1px solid #f2f4f6;
+            margin-top: 20px;
+        }
+
+        .page { display: none; }
+        .page.active { display: block; animation: slideUp 0.4s ease-out; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="lang-ko">
+
+    <header>
+        <div class="logo">P&P Loan Partners</div>
+        <div class="lang-tabs">
+            <button class="tab-btn active" id="tab-ko" onclick="setLanguage('ko')">한국어</button>
+            <button class="tab-btn" id="tab-ru" onclick="setLanguage('ru')">русский</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- (0) Home Page -->
+        <section id="index" class="page active">
+            <img src="https://iili.io/fiDO3CP.png" class="hero-img" alt="Main Hero">
+            <h1 class="ko-content">반가워요!<br>도움이 필요하신가요?</h1>
+            <h1 class="ru-content">Рады видеть вас!<br>Нужна помощь?</h1>
+            <p class="ko-content" style="margin-bottom: 32px;">대출을 위한 가이드를 순서대로 확인해 보세요.</p>
+            <p class="ru-content" style="margin-bottom: 32px;">Посмотрите руководства для кредита по порядку.</p>
+
+            <div class="menu-list">
+                <a href="#" onclick="navigate('ars')" class="btn-large">
+                    <span class="ko-content">1. ARS 개인정보활용 동의 방법</span>
+                    <span class="ru-content">1. Согласие через ARS</span>
+                </a>
+                <a href="#" onclick="navigate('mydata')" class="btn-large">
+                    <span class="ko-content">2. 공공마이데이터조회 동의 방법</span>
+                    <span class="ru-content">2. Согла시е через MyData</span>
+                </a>
+                <a href="#" onclick="navigate('pass_signup')" class="btn-large">
+                    <span class="ko-content">3. PASS 회원가입 방법</span>
+                    <span class="ru-content">3. Регистрация в PASS</span>
+                </a>
+                <a href="#" onclick="navigate('pass_cert')" class="btn-large">
+                    <span class="ko-content">4. PASS 인증서 등록 방법</span>
+                    <span class="ru-content">4. Регистрация сертификата PASS</span>
+                </a>
+                <a href="#" onclick="navigate('esign')" class="btn-large">
+                    <span class="ko-content">5. 전자서명 방법</span>
+                    <span class="ru-content">5. Электронная подпись</span>
+                </a>
+            </div>
+
+            <div class="copyright-banner">
+                © P&P PARTNERS. All rights reserved. 무단 사용 및 배포 금지.
+            </div>
+        </section>
+
+        <!-- (1) ARS Page -->
+        <section id="ars" class="page">
+            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1000" class="hero-img" alt="ARS Banner">
+            <div class="card">
+                <h2 class="ko-content">ARS 개인정보활용동의란?</h2>
+                <h2 class="ru-content">Что такое согласие через ARS?</h2>
+                <p class="ko-content">금융기관이 개인신용정보를 수집, 이용, 제공하는 것에 대해 전화자동응답시스템(ARS)으로 본인이 동의하는 절차입니다.</p>
+                <p class="ru-content">Это процедура вашего согласия на использование персональных данных через автоматическую голосовую систему по телефону.</p>
+            </div>
+            
+            <div class="card" style="border: 2px solid #ff4d4f; background: #fff1f0;">
+                <p class="ko-content" style="color: #cf1322; font-weight: 700; text-align: center;">'1522-2299'로 오는 전화를 꼭 받아주세요.<br>(신분증을 준비해주세요)</p>
+                <p class="ru-content" style="color: #cf1322; font-weight: 700; text-align: center;">Обязательно ответьте на звонок с номера '1522-2299'.<br>(Подготовьте удостоверение личности)</p>
+            </div>
+
+            <div id="ars-steps"></div>
+        </section>
+
+        <!-- (2) MyData Page -->
+        <section id="mydata" class="page">
+            <img src="https://iili.io/fimucTx.png" class="hero-img" alt="MyData Banner">
+            <div class="card">
+                <h2 class="ko-content">공공마이데이터조회 동의란?</h2>
+                <h2 class="ru-content">Что такое MyData?</h2>
+                <p class="ko-content">정부·공공기관이 보유한 나의 행정정보를 해당 금융기관이 직접 확인하도록 허용하는 것입니다. 서류를 따로 제출하지 않아도 됩니다.</p>
+                <p class="ru-content">Это разрешение финансовому учреждению проверить вашу информацию в госорганах напрямую. Вам не нужно подавать документы отдельно.</p>
+            </div>
+            <div id="mydata-steps"></div>
+        </section>
+
+        <!-- (3) PASS Signup Page -->
+        <section id="pass_signup" class="page">
+            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1000" class="hero-img" alt="PASS Signup Banner">
+            
+            <div class="card">
+                <p class="ko-content" style="font-weight: 700;">휴대폰에 맞는 다운로드 버튼을 눌러주세요.</p>
+                <p class="ru-content" style="font-weight: 700;">Нажмите кнопку загрузки для вашего телефона.</p>
+                
+                <div class="dl-grid">
+                    <a href="https://play.google.com/store/apps/details?id=com.sktelecom.tauth" class="dl-btn">Android SKT</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.kt.ktauth" class="dl-btn">Android KT</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.lguplus.smartotp" class="dl-btn">Android LGU+</a>
+                </div>
+                <div class="dl-grid">
+                    <a href="https://apps.apple.com/kr/app/pass-by-skt/id1141258007" class="dl-btn">iPhone SKT</a>
+                    <a href="https://apps.apple.com/kr/app/pass-by-kt/id1134371550" class="dl-btn">iPhone KT</a>
+                    <a href="https://apps.apple.com/us/app/pass-by-u/id1147394645" class="dl-btn">iPhone LGU+</a>
+                </div>
+                <p style="font-size: 13px; color: #8b95a1; text-align: center;">※ 다운이 안 될 시 스토어에서 "PASS"를 직접 검색하세요.</p>
+            </div>
+
+            <div class="card">
+                <h2 class="ko-content">PASS란 무엇인가?</h2>
+                <h2 class="ru-content">Что такое PASS?</h2>
+                <p class="ko-content">휴대폰 번호로 본인을 인증하는 전자신분증입니다. 종이 서류에 서명한 것과 동일한 법적 효력이 있습니다.</p>
+                <p class="ru-content">Это электронное удостоверение для подтверждения личности. Оно имеет ту же юридическую силу, что и бумажные документы.</p>
+            </div>
+
+            <div id="pass-signup-steps"></div>
+        </section>
+
+        <!-- (4) PASS Cert Page -->
+        <section id="pass_cert" class="page">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000" class="hero-img" alt="Cert Banner">
+            <div class="card">
+                <h2 class="ko-content">PASS 인증서 등록 방법</h2>
+                <h2 class="ru-content">Регистрация сертификата PASS</h2>
+                <p class="ko-content">PASS 인증서는 본인임을 증명하는 가장 안전하고 빠른 수단입니다.</p>
+                <p class="ru-content">Сертификат PASS — это самый безопасный и быстрый способ подтверждения личности.</p>
+            </div>
+            <div id="pass-cert-steps"></div>
+        </section>
+
+        <!-- (5) E-Sign Page -->
+        <section id="esign" class="page">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000" class="hero-img" alt="E-Sign Banner">
+            <h1 class="ko-content">전자서명 방법</h1>
+            <h1 class="ru-content">Электронная подпись</h1>
+            <div class="card">
+                <p class="ko-content">대출 계약의 마지막 단계입니다. 안내에 따라 서명을 안전하게 완료해 주세요.</p>
+                <p class="ru-content">Это последний шаг. Пожалуйста, завершите подпись в безопасности согласно инструкции.</p>
+            </div>
+            <div id="esign-steps">
+                <div class="card" style="text-align: center; border-style: dashed;">
+                    <p class="ko-content">서명 단계 가이드가 준비 중입니다.</p>
+                    <p class="ru-content">Инструкция по этапам подписи готовится.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Nav Bar -->
+    <nav class="bottom-nav">
+        <a href="#" onclick="navigate('index')" class="nav-link active" data-page="index">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            <span class="ko-content">홈</span><span class="ru-content">Главная</span>
+        </a>
+        <a href="#" onclick="navigate('ars')" class="nav-link" data-page="ars">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3"></path></svg>
+            <span class="ko-content">ARS</span><span class="ru-content">ARS</span>
+        </a>
+        <a href="#" onclick="navigate('mydata')" class="nav-link" data-page="mydata">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+            <span class="ko-content">데이터</span><span class="ru-content">Данные</span>
+        </a>
+        <a href="#" onclick="navigate('pass_signup')" class="nav-link" data-page="pass_signup">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle></svg>
+            <span class="ko-content">PASS가입</span><span class="ru-content">Регистр.</span>
+        </a>
+        <a href="#" onclick="navigate('pass_cert')" class="nav-link" data-page="pass_cert">
+            <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span class="ko-content">인증서</span><span class="ru-content">Сертиф.</span>
+        </a>
+        <a href="#" onclick="navigate('esign')" class="nav-link" data-page="esign">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            <span class="ko-content">전자서명</span><span class="ru-content">Подпись</span>
+        </a>
+    </nav>
+
+    <footer>
+        <div class="footer-info">
+            <p><strong>P&P Loan Partners Co.,LTD</strong></p>
+            <p>Business Registration Number: 840-88-02840</p>
+            <p>Address: 2F, 20 Namdongseo-ro 236beon-gil, Namdong-gu, Incheon</p>
+            <p>Email: kdu5261@gmail.com</p>
+            <p>Representative: Min-jung Kim</p>
+        </div>
+    </footer>
+
+    <script>
+        let lang = localStorage.getItem('pnp_lang') || 'ko';
+
+        function setLanguage(l) {
+            lang = l;
+            localStorage.setItem('pnp_lang', l);
+            document.body.className = 'lang-' + l;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.id === 'tab-' + l));
+        }
+
+        function navigate(pageId) {
+            window.scrollTo(0, 0);
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.getAttribute('data-page') === pageId));
+        }
+
+        function renderSteps(containerId, steps) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            steps.forEach((s, i) => {
+                const item = document.createElement('div');
+                item.className = 'step-item';
+                item.innerHTML = `
+                    <div class="step-label">Step ${i+1}</div>
+                    <div class="step-text ko-content">${s.kr}</div>
+                    <div class="step-text ru-content">${s.ru}</div>
+                    ${s.audio ? `<audio controls src="${s.audio}"></audio>` : ''}
+                    ${s.img ? `<img src="${s.img}" class="step-img" alt="Step ${i+1}" loading="lazy">` : ''}
+                    ${s.exKr ? `<div class="example-box ko-content">예: ${s.exKr}</div>` : ''}
+                    ${s.exRu ? `<div class="example-box ru-content">Пример: ${s.exRu}</div>` : ''}
+                `;
+                container.appendChild(item);
+            });
+            const fin = document.createElement('div');
+            fin.className = 'card'; fin.style.textAlign = 'center'; fin.style.background = '#e8f3ff'; fin.style.border = 'none';
+            fin.innerHTML = `<strong class="ko-content" style="color:#3182f6; font-size: 18px;">완료되었습니다.</strong><strong class="ru-content" style="color:#3182f6; font-size: 18px;">Завершено.</strong>`;
+            container.appendChild(fin);
+        }
+
+        // --- ARS Data ---
+        const arsData = [
+            { kr: "음성멘트 후 신분증 등록번호와 '#'을 눌러주세요.", ru: "Введите номер ID-карты и нажмите '#' после сообщения.", audio: "https://kdu5261.github.io/my-audio-player/personal1.MP3", exKr: "8404146147014#", exRu: "8404146147014#" },
+            { kr: "이용 중인 통신사를 번호를 눌러 선택하세요.", ru: "Выберите вашего оператора, нажав соответствующую цифру.", audio: "https://kdu5261.github.io/my-audio-player/personal2.MP3", exKr: "SKT는 1번 / KT는 2번 / LGU+는 3번", exRu: "SKT-1, KT-2, LGU+-3" },
+            { kr: "휴대폰 번호와 '#'을 눌러주세요.", ru: "Введите номер телефона и нажмите '#'.", audio: "https://kdu5261.github.io/my-audio-player/personal3.MP3", exKr: "01012341234#" },
+            { kr: "음성멘트 후 '1'번을 눌러주세요.", ru: "Нажмите '1' после голосового сообщения.", audio: "https://kdu5261.github.io/my-audio-player/personal4.MP3" },
+            { kr: "SMS 문자의 6자리 숫자를 전화기에 입력하세요.", ru: "Введите 6-значный код из SMS на клавиатуре телефона.", audio: "https://kdu5261.github.io/my-audio-player/personal5.MP3", img: "https://iili.io/fihpJ1V.png", exKr: "412704" },
+            { kr: "통화를 종료해 주세요.", ru: "Завершите вызов.", audio: "https://kdu5261.github.io/my-audio-player/personal6.MP3" }
+        ];
+
+        // --- MyData Steps ---
+        const myDataSteps = [
+            { kr: "SMS문자의 링크를 누르세요", ru: "Нажмите на ссылку в SMS", img: "https://iili.io/fiPIoxf.png" },
+            { kr: "휴대폰을 선택하세요", ru: "Выберите модель телефона", img: "https://iili.io/fiPAziv.png" },
+            { kr: "성함을 입력하세요", ru: "Введите имя", img: "https://iili.io/fiP5QlR.png" },
+            { kr: "신분증 등록번호를 입력하세요", ru: "Введите номер ID-карты", img: "https://iili.io/fiPaLKb.png" },
+            { kr: "휴대폰번호/통신사를 입력하세요(1)", ru: "Введите номер и оператора (1)", img: "https://iili.io/fiP0xFs.png" },
+            { kr: "휴대폰번호/통신사를 입력하세요(2)", ru: "Введите номер и оператора (2)", img: "https://iili.io/fiPG0KX.png" },
+            { kr: "순서대로 누르세요", ru: "Нажимайте по порядку", img: "https://iili.io/fiPN4PR.png" },
+            { kr: "SMS 문자를 확인하세요", ru: "Проверьте входящее SMS", img: "https://iili.io/fihpJ1V.png" },
+            { kr: "6자리 코드를 입력하세요", ru: "Введите 6-значный код", img: "https://iili.io/fiPURON.png" },
+            { kr: "순서대로 진행하세요", ru: "Следуйте по порядку", img: "https://iili.io/fiPtuDJ.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiPmclV.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiPy2CG.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fii9dAP.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiiJ7a4.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiidv5l.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fii30wN.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiiFgzN.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiifHjp.png" },
+            { kr: "잠시 기다려 주세요", ru: "Ожидайте некоторое время", img: "https://iili.io/fiiBxBS.png" },
+            { kr: "표시된 곳을 누르면 완료됩니다", ru: "Нажмите здесь для завершения", img: "https://iili.io/fiiCTnp.png" }
+        ];
+
+        // --- PASS Signup Steps ---
+        const passSignupData = [
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiip5N9.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fis9tuS.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fisHbJR.png" },
+            { kr: "순서대로 진행하세요", ru: "Продолжайте по порядку", img: "https://iili.io/fisnXn4.png" },
+            { kr: "순서대로 진행하세요", ru: "Продолжайте по порядку", img: "https://iili.io/fisx1hG.png" },
+            { kr: "순서대로 진행하세요", ru: "Продолжайте по порядку", img: "https://iili.io/fiszVta.png" },
+            { kr: "SMS 문자를 확인하세요", ru: "Проверьте SMS-сообщение", img: "https://iili.io/fisuXou.png" },
+            { kr: "6자리 코드를 입력하세요", ru: "Введите 6-значный код", img: "https://iili.io/fis5At1.png" },
+            { kr: "새 비밀번호 6자리를 입력하세요", ru: "Введите новый 6-значный пароль", img: "https://iili.io/fissiwG.png" },
+            { kr: "비밀번호를 다시 한 번 입력하세요", ru: "Введите пароль еще раз", img: "https://iili.io/fistCSS.png" },
+            { kr: "은행을 선택하세요", ru: "Выберите ваш банк", img: "https://iili.io/fiLRCR2.png" },
+            { kr: "순서대로 진행하세요", ru: "Продолжайте по порядку", img: "https://iili.io/fiLYtst.png" },
+            { kr: "은행 앱에 접속해 확인하세요", ru: "Откройте приложение банка", img: "https://iili.io/fiLV8Lx.png" },
+            { kr: "3자리 코드를 입력하세요", ru: "Введите 3-значный код", img: "https://iili.io/fiLh622.png" }
+        ];
+
+        // --- PASS Cert Steps ---
+        const certData = [
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiZIeFj.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiZTrJ4.png" },
+            { kr: "순서대로 진행하세요", ru: "Продолжайте по порядку", img: "https://iili.io/fiZAXtI.png" },
+            { kr: "순서대로 진행하세요", ru: "Продолжайте по порядку", img: "https://iili.io/fiZ5f1e.png" },
+            { kr: "SMS 문자를 확인하세요", ru: "Проверьте SMS-сообщение", img: "https://iili.io/fiZY3le.png" },
+            { kr: "6자리 코드를 입력하세요", ru: "Введите 6-значный код", img: "https://iili.io/fiZcHF9.png" },
+            { kr: "표시된 곳을 누르세요", ru: "Нажмите в указанном месте", img: "https://iili.io/fiZlAg9.png" },
+            { kr: "은행을 선택하세요", ru: "Выберите ваш банк", img: "https://iili.io/fiLRCR2.png" },
+            { kr: "순서대로 진행하세요", ru: "Продолжайте по порядку", img: "https://iili.io/fiZGDZb.png" },
+            { kr: "은행 앱에 접속하세요", ru: "Откройте приложение банка", img: "https://iili.io/fiZXpb1.png" },
+            { kr: "3자리 코드를 입력하세요", ru: "Введите 3-значный код", img: "https://iili.io/fiZjfEb.png" },
+            { kr: "기존 비밀번호 6자리를 입력하세요", ru: "Введите старый пароль PASS", img: "https://iili.io/fiZNTqg.png" },
+            { kr: "새 비밀번호를 입력하세요", ru: "Введите новый пароль", img: "https://iili.io/fiZO4Pn.png" },
+            { kr: "한 번 더 입력하세요", ru: "Введите еще раз", img: "https://iili.io/fiZkkQI.png" },
+            { kr: "완료되었습니다", ru: "Завершено", img: "https://iili.io/fiZvwFe.png" }
+        ];
+
+        window.onload = () => {
+            setLanguage(lang);
+            renderSteps('ars-steps', arsData);
+            renderSteps('mydata-steps', myDataSteps);
+            renderSteps('pass-signup-steps', passSignupData);
+            renderSteps('pass-cert-steps', certData);
+        };
+    </script>
+</body>
+</html>
